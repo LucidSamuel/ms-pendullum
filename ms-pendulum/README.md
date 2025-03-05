@@ -1,40 +1,74 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/pages/api-reference/create-next-app).
+# Market Sentiment Pendulum
+
+A dynamic visualization of market sentiment using a physics-based pendulum.
+
+## Live Demo
+
+[View the live demo](https://ms-pendulum.vercel.app/)
+
+## Physics Implementation
+
+The pendulum in this project uses a simplified physics model to create realistic motion:
+
+### Key Physics Principles
+
+1. **Simple Harmonic Motion**: The pendulum follows the principles of simple harmonic motion, where the restoring force is proportional to displacement.
+
+2. **Spring Force**: A virtual spring pulls the pendulum toward the target angle:
+
+   ```typescript
+   const springForce = (targetAngle - currentAngle) * SPRING_CONSTANT;
+   ```
+
+3. **Gravity**: Simulated gravity affects the pendulum based on its angle:
+
+   ```typescript
+   const gravityForce = Math.sin(currentAngle * (Math.PI / 180)) * GRAVITY;
+   ```
+
+4. **Damping**: Air resistance gradually reduces the pendulum's velocity:
+
+   ```typescript
+   velocity *= DAMPING;
+   ```
+
+5. **Numerical Integration**: The position is updated each frame using basic Euler integration:
+   ```typescript
+   currentAngle += velocity;
+   ```
+
+### Physics Constants
+
+- `SPRING_CONSTANT = 0.003`: Controls how strongly the pendulum is pulled toward the target position
+- `DAMPING = 0.98`: Controls how quickly the pendulum loses energy (1.0 = no damping)
+- `GRAVITY = 0.2`: Controls the effect of gravity on the pendulum's swing
+
+### Implementation Details
+
+The physics simulation runs in a requestAnimationFrame loop for smooth animation. When market sentiment changes, the target angle is updated, and a small impulse is added to the pendulum's velocity to initiate movement.
+
+The pendulum's motion is determined by:
+
+1. The current market sentiment (target position)
+2. Physical forces (spring, gravity, damping)
+3. User interaction (clicking on the sentiment scale)
+
+This creates a natural, continuous motion that responds to changes in market sentiment while maintaining the appearance of a physical object governed by real-world physics.
+
+## Technologies Used
+
+- Next.js
+- TypeScript
+- Framer Motion
+- SCSS Modules
 
 ## Getting Started
 
-First, run the development server:
+1. Clone the repository
+2. Install dependencies: `npm install`
+3. Run the development server: `npm run dev`
+4. Open [http://localhost:3000](http://localhost:3000) in your browser
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## License
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
-
-[API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) instead of React pages.
-
-This project uses [`next/font`](https://nextjs.org/docs/pages/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn-pages-router) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/pages/building-your-application/deploying) for more details.
+MIT
