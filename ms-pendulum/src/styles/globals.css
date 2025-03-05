@@ -1,0 +1,54 @@
+@import "tailwindcss";
+
+:root {
+  --primary-color: #4361ee;
+  --secondary-color: #3a0ca3;
+  --accent-color: #4cc9f0;
+  --sell-color: #ef476f;
+  --buy-color: #06d6a0;
+  --neutral-color: #8d99ae;
+  --background-color: #f8f9fa;
+  --card-background: #ffffff;
+  --text-primary: #2b2d42;
+  --text-secondary: #8d99ae;
+  --text-light: #ffffff;
+  --border-radius: 12px;
+  --transition-speed: 0.3s;
+  --box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: "Inter", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: "Inter", sans-serif;
+}
